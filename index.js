@@ -1,0 +1,1 @@
+// Page to create the server and initalize it
