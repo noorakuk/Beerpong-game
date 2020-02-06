@@ -15,7 +15,12 @@ players(
 )
 `;
 
-pool.query(createPlayerQuery, (err, res) => {
-    console.log(err, res)
-    pool.end()
-});
+function playerTable() {
+    pool.query(createPlayerQuery, (err, res) => {
+        if (err) {
+            throw err
+        }
+    });
+}
+
+module.exports = { playerTable }

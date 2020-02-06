@@ -4,12 +4,21 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
+const initializeDB = require('./models/database')
+
 
 app.listen(port, (err) => {
     if (err) {
         console.log(err);
     }
-    console.log("Server is listenin on port " + port); 
+    try {
+        initializeDB.playerTable()
+        
+    } catch (err) {
+        console.log(err);
+    }
+    console.log("Server is listenin on port " + port);
+
 });
 
 // API!
