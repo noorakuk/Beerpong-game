@@ -1,24 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Beerpong starting page</title>
+    <meta charset="utf-8">
     <link rel="stylesheet" href="../styles/styles.css">
-</head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script></head>
 <body>
     <div>
         <h1>Start adding players</h1>
     </div>
+    <div id="messages">
+        <p id="messText"></p>
+    </div>
     <div>
         <ul id="addedPlayers">
         </ul>
-        <button id="removeAll">Remove all</button> 
+        <button id="removeAll" onclick="removeAll()">Remove all</button> 
     </div>
-    <form action="">
-        <input type="text" placeholder="Name">
-        <button type="submit">Add player</button>
-    </form>
+    <input type="text" id="playerName" placeholder="Name">
+    <button type="submit" onclick="addPlayer(document.getElementById('playerName').value)">Add player</button>
     <div id="startPlaying">
-        <button type="submit">Start playing</button>
+        <form action="/game" method="GET">
+            <button type="submit">Start playing</button>
+        </form>
     </div>
+    <script src="../controller/starting-page.js" charset="utf-8"></script>
 </body>
 </html>
