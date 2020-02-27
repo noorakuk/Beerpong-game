@@ -18,6 +18,25 @@ const addPlayer = (request, response) => {
     })
 }
 
+const addTeam = (request, response) => {
+    const queryString = "INSERT INTO teams(teamname, player1, player2) VALUES($1, $2, $3) RETURNING *"
+    const value = [request.body.name, request.body.player1, request.body.player2]
+    pool.query(queryString, value, (err, res) => {
+        if (err) throw err;
+        console.log("Successful adding");
+        console.log(res.rows);
+        response.status(200).json(res.rows)
+    })
+}
+
+const getTeams = (request, response) => {
+    const queryString = "SELECT * FROM teams"
+    pool.query(queryString, (err, res) => {
+        if (err) throw err;
+        response.status(200).json(res.rows);
+    })
+}
+
 function deleteAll(table) {
     const query = "DELETE FROM " + table + " RETURNING *"
     pool.query(query, (err, res) => {
@@ -28,4 +47,4 @@ function deleteAll(table) {
 
 
 
-module.exports = { addPlayer, deleteAll }
+module.exports = { addPlayer, addTeam, deleteAll, getTeams }

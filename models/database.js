@@ -29,6 +29,7 @@ games(
     playnro NUMERIC PRIMARY KEY,
     team1 TEXT references teams(teamName),
     team2 TEXT references teams(teamName),
+    winner TEXT references teams(teamName),
     layer NUMERIC NOT NULL
 )
 `

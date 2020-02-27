@@ -65,7 +65,7 @@ function removeAll() {
     };
     xhttp.open("POST", "/delete", true);
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xhttp.sgameend(JSON.stringify({"table" : "players"}));
+    xhttp.send(JSON.stringify({"table" : "players"}));
 }
 
 function startingGame() {

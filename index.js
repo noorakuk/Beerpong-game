@@ -22,7 +22,9 @@ app.get("/", (req, res) => {
 })
 
 app.get("/players", initializeDB.getPlayers)
+app.get("/teams", changeDB.getTeams)
 app.post("/addPlayer", changeDB.addPlayer)
+app.post("/addTeam", changeDB.addTeam)
 app.post("/delete", (req, res) => {
     var table = req.body.table    
     try {
