@@ -11,6 +11,7 @@ const changeDB = require("./models/api")
 
 app.use("/styles", express.static(__dirname + '/styles'));
 app.use("/controller", express.static(__dirname + '/controller'));
+app.use("/views", express.static(__dirname + '/views'))
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
@@ -21,13 +22,9 @@ app.get("/", (req, res) => {
 })
 
 app.get("/players", initializeDB.getPlayers)
-
 app.post("/addPlayer", changeDB.addPlayer)
-
 app.post("/delete", (req, res) => {
-    var table = req.body.table
-    console.log(table);
-    
+    var table = req.body.table    
     try {
         changeDB.deleteAll(table);
         res.statusCode = 200;
@@ -36,6 +33,11 @@ app.post("/delete", (req, res) => {
         res.statusCode = 500
         res.send(err);
     }
+})
+
+app.get("/game", (req, res) => {
+    
+    res.sendFile(path.join(__dirname + '/views/game.html'))
 })
 
 app.listen(port, (err) => {

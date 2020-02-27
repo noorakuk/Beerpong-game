@@ -18,7 +18,7 @@
         <button id="removeAll" onclick="removeAll()">Remove all</button> 
     </div>
     <input type="text" id="playerName" placeholder="Name">
-    <button type="submit" onclick="addPlayer(document.getElementById('playerName').value)">Add player</button>
+    <button type="submit" id="addPlayerButton" onclick="addPlayer(document.getElementById('playerName').value)">Add player</button>
     <div id="startPlaying">
         <form action="/game" method="GET">
             <button type="submit">Start playing</button>

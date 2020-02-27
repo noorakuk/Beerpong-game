@@ -13,9 +13,22 @@ xhttp.onreadystatechange = function() {
 xhttp.open("GET", "/players", true);
 xhttp.send();
 
+// Get the input field
+var input = document.getElementById("playerName");
+// Clicking enter same as clicking button
+input.addEventListener("keyup", function(event) {
+    // Number 13 is the "Enter" key on the keyboard
+    if (event.keyCode === 13) {
+      // Cancel the default action, if needed
+      event.preventDefault();
+      // Trigger the button element with a click
+      document.getElementById("addPlayerButton").click();
+    }
+  }); 
 
 // If success add to the list in main-page and add player to the database
 function addPlayer(name) {
+    document.getElementById("playerName").value = "";
     // Post request request.body = name
     // If success, add name to list 
     var xhttp = new XMLHttpRequest();
@@ -29,6 +42,7 @@ function addPlayer(name) {
         var listPart = document.createElement("li");
         listPart.appendChild(document.createTextNode(addedName));
         document.getElementById("addedPlayers").appendChild(listPart);
+
     }
     };
     xhttp.open("POST", "/addPlayer", true);
