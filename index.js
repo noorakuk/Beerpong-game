@@ -36,7 +36,6 @@ app.post("/delete", (req, res) => {
 })
 
 app.get("/game", (req, res) => {
-    
     res.sendFile(path.join(__dirname + '/views/game.html'))
 })
 

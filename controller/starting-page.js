@@ -65,5 +65,25 @@ function removeAll() {
     };
     xhttp.open("POST", "/delete", true);
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xhttp.send(JSON.stringify({"table" : "players"}));
+    xhttp.sgameend(JSON.stringify({"table" : "players"}));
+}
+
+function startingGame() {
+    
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        var playerList = JSON.parse(this.responseText);
+        if (playerList.length % 2 != 0) {
+            console.log("Pariton pelaajamäärä");
+            
+            const text = "Pelaajia pitää olla parillinen määrä";
+            document.getElementById("messText").innerHTML = text;
+        } else {
+            window.location = "/game";
+        }
+    }
+}
+xhttp.open("GET", "/players", true);
+xhttp.send();
 }

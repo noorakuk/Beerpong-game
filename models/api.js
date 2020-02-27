@@ -23,8 +23,9 @@ function deleteAll(table) {
     pool.query(query, (err, res) => {
         if (err) throw err;
         console.log("Successful deleting");
-        // console.log(res.rows);
     })
 }
+
+
 
 module.exports = { addPlayer, deleteAll }

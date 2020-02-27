@@ -18,14 +18,12 @@
         </div>
         <div id="basics">
             <input type="text" id="playerName" placeholder="Name">
-            <button class="button hoverbutton" type="submit" onclick="addPlayer(document.getElementById('playerName').value)">Add player</button>
+            <button class="button hoverbutton" id="addPlayerButton" type="submit" onclick="addPlayer(document.getElementById('playerName').value)">Add player</button>
             <button class="button hoverbutton" id="removeAll" onclick="removeAll()">Remove all</button>
         </div>
 
         <div id="startPlaying">
-            <form action="/game" method="GET">
-                <button class="button hoverbutton" type="submit">Start playing</button>
-            </form>
+            <button class="button hoverbutton" type="submit" onclick="startingGame()">Start playing</button>
         </div>
         <div id="listPlayers">
                 <h3>Added players:</h3>
