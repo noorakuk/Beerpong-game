@@ -25,6 +25,7 @@ app.get("/players", initializeDB.getPlayers)
 app.get("/teams", changeDB.getTeams)
 app.post("/addPlayer", changeDB.addPlayer)
 app.post("/addTeam", changeDB.addTeam)
+app.post("/addGame", changeDB.addGame)
 app.post("/delete", (req, res) => {
     var table = req.body.table    
     try {
@@ -35,6 +36,18 @@ app.post("/delete", (req, res) => {
         res.statusCode = 500
         res.send(err);
     }
+})
+app.post("/endGame", (req, res) => {
+    try {
+        changeDB.stopGameDeleting();
+        res.statusCode = 200;
+        res.send(); 
+    } catch (err) {
+        res.statusCode = 500;
+        res.send(err);
+    }
+    
+    
 })
 
 app.get("/game", (req, res) => {

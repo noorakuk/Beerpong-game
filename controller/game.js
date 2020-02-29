@@ -1,6 +1,4 @@
-// TODO:
 // Seuraavaa ei toteuteta jos kannassa on joukkueet valmiina
-
 var xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -19,22 +17,19 @@ xhttp.onreadystatechange = function() {
                         playerList.push(responseObject[i].name);
                     }
                     createTeams(playerList, pairList);
+                    // Näytä tämän jälkeen parit
                 }
             }
             xhttp.open("GET", "/players", true);
             xhttp.send();
+        } else {
+            // Näytä parit ja pelit
         }
     }
 }
 xhttp.open("GET", "/teams", true);
 xhttp.send();
 
-
-
-
-// Luodaan ensimmäinen kierros joukkueineen
-
-// Luodaan ehkä muutkin kierrokset, mutta ilman joukkueita
 
 function createTeams(playerList, pairList, index = 1) {
 
@@ -63,3 +58,28 @@ function createTeams(playerList, pairList, index = 1) {
 
 
 // Pelin jälkeen kaikki taulut tyhjennetään
+function stopGame() {
+    var txt = "Oletko varma, että haluat lopettaa pelin? Kaikki pelitiedot tyhjennetään.";
+    if (confirm(txt)) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 & this.status == 200) {
+                window.location = "../"
+            }
+        }
+        xhttp.open("POST", "/endGame", true);
+        xhttp.send();
+    } else {
+        var alertText = "Peli jatkuu"
+        document.getElementById("messageBox").innerHTML = alertText;
+    }
+}
+
+// Luodaan ensimmäinen kierros joukkueineen
+function createRound(roundNumber) {
+    if (roundNumber == 1) {
+
+    } else {
+
+    }
+}

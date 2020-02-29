@@ -2,6 +2,18 @@
 var xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
+        var teamList = JSON.parse(this.responseText);
+        if (teamList.length != 0) {
+            window.location = "/game";
+        }
+    }
+}
+xhttp.open("GET", "/teams", true);
+xhttp.send();
+
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
         var playerList = JSON.parse(this.responseText);
         for (i = 0; i < playerList.length; i++) {
             var listPart = document.createElement("li");
