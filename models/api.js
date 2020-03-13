@@ -46,6 +46,37 @@ const getTeams = (request, response) => {
     })
 }
 
+function getTeamList() {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            const queryString = "SELECT * FROM teams"
+            pool.query(queryString, (err, res) => {
+            if (err) throw err;            
+            resolve(res.rows);
+            });
+        
+        }, 1000);
+    })
+}
+
+async function createGames() {
+    const teams = await getTeamList();
+
+    var playCounter = 0;
+    // console.log(teams);
+
+    // First layer are with random teams
+    for (i = 0;i < teams.length; i = i + 2) {
+        playCounter++;
+        var teamname1 = teams[i].teamname;
+        var teamname2 = teams[i+1].teamname;
+        console.log(teamname1 + " + " + teamname2);
+        
+    }
+    // // After first layer
+    // createGameLayer(Math.ceil(playCounter/2), playCounter + 1);
+}
+
 function deleteAll(table) {
     const query = "DELETE FROM " + table + " RETURNING *"
     pool.query(query, (err, res) => {
@@ -66,5 +97,27 @@ function stopGameDeleting() {
     })
 }
 
+// Reqursive way to create games layer by layer until the final game
+// First layer should be creating before this one, because teams are null here
+// Kind of PRIVATE funktion!!
+function createGameLayer(playAmount, firstGameId, layer) {
+    var gameId = firstGameId;
+    if (playAmount == 1) {
+        return;
+    } else {
+        for (i = 1; i <= playAmount; i++) {
+            // const query = "INSERT INTO games (playnro, layer) VALUES ($1, $2)";
+            // const vars = [gameId, layer];
+            // gameId++;
+            // pool.query(query, vars, (err, res) => {
+            //     if (err) throw err;
+            //     console.log("Peli "+ res.rows + " lisätty kantaan");
+            // })
+            
+        }
+        createGameLayer(Math.ceil(playAmount/2), gameId + 1, layer + 1);
+    }
+}
 
-module.exports = { addPlayer, addTeam, addGame, deleteAll, getTeams, stopGameDeleting }
+
+module.exports = { addPlayer, addTeam, addGame, createGames, deleteAll, getTeams, stopGameDeleting }

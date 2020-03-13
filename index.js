@@ -26,6 +26,16 @@ app.get("/teams", changeDB.getTeams)
 app.post("/addPlayer", changeDB.addPlayer)
 app.post("/addTeam", changeDB.addTeam)
 app.post("/addGame", changeDB.addGame)
+app.post("/addGames", (req, res) =>{
+    try {        
+        changeDB.createGames();
+        res.statusCode = 200;
+        res.send();
+    } catch (err) {
+        res.statusCode = 500;
+        res.send(err);
+    }
+})
 app.post("/delete", (req, res) => {
     var table = req.body.table    
     try {

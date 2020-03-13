@@ -52,9 +52,11 @@ function createTeams(playerList, pairList, index = 1) {
     }
     xhttp.open("POST", "/addTeam", true);
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xhttp.send(JSON.stringify({"name" : "Team " + index, "player1" : randomPlayer1, "player2" : ran}));
+    xhttp.send(JSON.stringify({"name" : "Team " + index, "player1" : randomPlayer1, "player2" : randomPlayer2}));
 
 };
+
+
 
 
 // Pelin jälkeen kaikki taulut tyhjennetään
@@ -76,10 +78,13 @@ function stopGame() {
 }
 
 // Luodaan ensimmäinen kierros joukkueineen
-function createRound(roundNumber) {
-    if (roundNumber == 1) {
-
-    } else {
-
+function createRound(teamList) {
+    for (round = 0; round  = 5; round++ ) {
+        if (round == 1) {
+            for (i = 0; i < teamList.length; i++ ) {
+                
+            }
+        }
     }
+    
 }
