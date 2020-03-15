@@ -13,10 +13,15 @@ xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     var playerList = [];
                     var responseObject = JSON.parse(this.responseText);
-                    for (i = 0; i < responseObject.length; i++) {
-                        playerList.push(responseObject[i].name);
+                    console.log(responseObject.length);
+                    if (responseObject.length == 0) {                        
+                        window.location = "/";
+                    } else {
+                        for (i = 0; i < responseObject.length; i++) {
+                            playerList.push(responseObject[i].name);
+                        }
+                        createTeams(playerList, pairList);
                     }
-                    createTeams(playerList, pairList);
                     // Näytä tämän jälkeen parit
                 }
             }
@@ -24,7 +29,10 @@ xhttp.onreadystatechange = function() {
             xhttp.send();
         } else {
             // Näytä parit ja pelit
+
         }
+    } else {        
+        // window.location = "../";
     }
 }
 xhttp.open("GET", "/teams", true);
@@ -34,6 +42,14 @@ xhttp.send();
 function createTeams(playerList, pairList, index = 1) {
 
     if (playerList.length < 2) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            // Rakennetaan pelipuu
+        }
+        }
+        xhttp.open("POST", "/addGames", true);
+        xhttp.send();
         return;
     }
     var randomIndex = Math.floor(Math.random() * playerList.length);

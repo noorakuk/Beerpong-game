@@ -25,7 +25,7 @@ app.get("/players", initializeDB.getPlayers)
 app.get("/teams", changeDB.getTeams)
 app.post("/addPlayer", changeDB.addPlayer)
 app.post("/addTeam", changeDB.addTeam)
-app.post("/addGame", changeDB.addGame)
+// app.post("/addGame", changeDB.addGame)
 app.post("/addGames", (req, res) =>{
     try {        
         changeDB.createGames();
